@@ -20,6 +20,81 @@
   </script>
 </head>
 <body>
-<h1>SIT223-SIT753 - Professional Practice in IT</h1>
+<div class="sidebar">
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul>
+      <li><a href="https://www.deakin.edu.au/">Home</a></li>
+      <li><a href="#">Unit Details</a></li>
+      <li><a href="#">Schedule</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Main content -->
+   <h1 class="header">SIT223–SIT753 - Professional Practice in IT</h1>
+  <div class="main-content">
+    
+    <h3> Unit details</h3>
+    <table style="width:100%">
+      <tr>
+        <td>Year:</td>
+        <td>2023 unit information</td>
+      </tr>
+      <tr>
+        <td>Enrolment modes:</td>
+        <td>Trimester 1: Burwood (Melbourne), Geelong, Cloud (online)</td>
+      </tr>
+      <tr>
+        <td>Credit point(s):</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Unit Chair:</td>
+        <td>Trimester 1: Azadeh Ghari Neiat</td>
+      </tr>
+      <tr>
+        <td>Scheduled Learning Activities:</td>
+        <td>1 x 3 hour active class per week, weekly drop in support.</td>
+      </tr>
+    </table> 
+  </div>
+
+  <!-- Sidebar toggle JS -->
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+
+    hamburger.addEventListener('mouseenter', () => {
+      sidebar.classList.add('open');
+      mainContent.classList.add('shift');
+    });
+
+    sidebar.addEventListener('mouseleave', () => {
+      sidebar.classList.remove('open');
+      mainContent.classList.remove('shift');
+    });
+  </script>
+
+  <!-- Smooth scroll for sidebar links -->
+  <script>
+  document.querySelectorAll('.sidebar a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+  </script>
+
 </body>
 </html>
