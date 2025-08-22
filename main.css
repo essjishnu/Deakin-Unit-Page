@@ -42,7 +42,8 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
-/* ===== Header ===== */.site-header {
+/* ===== Header ===== */
+.site-header {
   background: var(--header-bg);
   border-bottom: 1px solid var(--border);
   display: flex;
