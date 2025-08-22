@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title> Home </title>
-<link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <title> Home </title>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
+
 <body>
-<h1>SIT223-SIT753 - Professional Practice in IT</h1>
+    <h1>SIT223-SIT753 - Professional Practice in IT</h1>
+    <h3> Content</h3>
+    <p>
+        To be successful IT graduates need to understand the use of industry tools and practices,
+        the ways these tools work and connect together, and the underlying professional, ethical,
+        and teamwork knowledge and skills needed to put these into practice in a professional manner.
+    </p>
+    <h3>Hurdle requirement</h3>
+    <p>
+        To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.
+    </p>
+    <a href="https://www.deakin.edu.au/students/enrolment-and-fees/fees" class="external_link"> >Current students</a>
+    <script>
+        // === External link enhancer for links with class 'external_link' ===
+        document.querySelectorAll('a.external_link').forEach(function (a) {
+            const WARNING_TEXT = "You are leaving the university website.";
+
+            try {
+                const url = new URL(a.href);
+
+                // US3-T4: Ensure HTTPS
+                if (url.protocol === 'http:') {
+                    url.protocol = 'https:';
+                    a.href = url.toString();
+                }
+
+                // US3-T2: Add small warning icon (SVG)
+                const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                icon.setAttribute("viewBox", "0 0 24 24");
+                icon.setAttribute("class", "warning-icon");
+                icon.innerHTML = `<path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2zm1 12V8h-2v6h2zm0 4v-2h-2v2h2z"/>`;
+                a.appendChild(icon);
+
+                // US3-T7: Add short text popup/tooltip
+                const tip = document.createElement("span");
+                tip.className = "warning-tip";
+                tip.textContent = WARNING_TEXT;
+                a.appendChild(tip);
+
+                // Optional confirm dialog on click
+                a.addEventListener("click", function (e) {
+                    const proceed = confirm(WARNING_TEXT + "\n\nDo you want to continue?");
+                    if (!proceed) e.preventDefault();
+                });
+
+            } catch (err) {
+                console.error("Invalid link", err);
+            }
+        });
+    </script>
 </body>
+
 </html>
