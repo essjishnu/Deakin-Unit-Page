@@ -1,19 +1,57 @@
+/* Type sizes from your base */
+h1 { font-size: 40px; font-family: Arial; }
+h2 { font-size: 25px; font-family: Arial; }
+h3 { font-family: Arial; }
+p  { font-size: 14px; font-family: Arial; }
 
-
-h1 {
-  font-size: 40px;
-  font-family: Arial
-}
-h2 {
-  font-size: 25px;
-  font-family: Arial
-}
-h3 {
-  font-family: Arial
-}
-p {
-  font-size: 14px;
-  font-family: Arial
+/* ---------- Theme variables ---------- */
+:root{
+  --bg:#ffffff;        /* light background */
+  --text:#0f172a;      /* dark text */
+  --header-bg: darkcyan;  /* your original header color */
 }
 
+html[data-theme="dark"]{
+  --bg:#0f1115;        /* dark background */
+  --text:#e7e7ea;      /* light text */
+  --header-bg:#1f2937; /* darker header for night */
+}
 
+/* ---------- Base ---------- */
+html, body { height: 100%; }
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- Header ---------- */
+/* switched from generic `div` to a class so it only styles the header */
+.site-header{
+  background-color: var(--header-bg);
+  text-align: right;
+  padding: 8px 16px;
+
+  /* layout so toggle is left and logo is right */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Toggle button styling */
+.theme-toggle{
+  border: 1px solid rgba(0,0,0,0.15);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #111827; /* dark for visibility on light header */
+  color: #ffffff;
+}
+html[data-theme="dark"] .theme-toggle{
+  background: #e7e7ea; /* invert for dark mode */
+  color: #0f1115;
+}
+.theme-toggle:focus-visible{
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
