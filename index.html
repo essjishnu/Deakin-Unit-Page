@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title> Home </title>
-<link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+
+  <!-- Set initial theme before paint (prevents flash) -->
+  <script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored ? stored : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+  </script>
 </head>
 <body>
-<div class="sidebar">
+
+  <!-- Header: left = theme toggle, right = logo -->
+  <div class="site-header" role="banner" aria-label="Unit header">
+    <button id="theme-toggle" class="theme-toggle" type="button"
+            aria-pressed="false" aria-label="Toggle dark mode">🌙 Dark</button>
+    <img src="logo.svg" alt="Deakin" width="200" height="210">
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
     <div class="hamburger">
       <span></span>
       <span></span>
@@ -13,17 +37,17 @@
     </div>
     <ul>
       <li><a href="https://www.deakin.edu.au/">Home</a></li>
-      <li><a href="#">Unit Details</a></li>
-      <li><a href="#">Schedule</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#unit-details">Unit Details</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 
   <!-- Main content -->
-   <h1 class="header">SIT223–SIT753 - Professional Practice in IT</h1>
   <div class="main-content">
-    
-    <h3> Unit details</h3>
+    <h1 class="header">SIT223–SIT753 - Professional Practice in IT</h1>
+
+    <h3 id="unit-details">Unit details</h3>
     <table style="width:100%">
       <tr>
         <td>Year:</td>
@@ -47,6 +71,30 @@
       </tr>
     </table> 
   </div>
+
+  <!-- Theme toggle JS -->
+  <script>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    function setTheme(theme){
+      document.documentElement.setAttribute('data-theme', theme);
+      try { localStorage.setItem('theme', theme); } catch(e) {}
+      var isDark = theme === 'dark';
+      btn.setAttribute('aria-pressed', String(isDark));
+      btn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+    }
+
+    // initialise from the attribute set in the <head> snippet
+    setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+
+    btn.addEventListener('click', function(){
+      var next = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+      setTheme(next);
+    });
+  })();
+  </script>
 
   <!-- Sidebar toggle JS -->
   <script>
