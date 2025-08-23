@@ -1,12 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title> Home </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home</title>
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-</head>
+
+    <!-- Set initial theme before paint (prevents flash) -->
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = stored ? stored : (prefersDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) { }
+        })();
+    </script>
+    <html>
+
+    <head>
+        <title> Home </title>
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    </head>
 
 <body>
+
+    <!-- Header: left = theme toggle, right = logo -->
+    <div class="site-header" role="banner" aria-label="Unit header">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false"
+            aria-label="Toggle dark mode">🌙 Dark</button>
+        <img src="logo.svg" alt="Deakin" width="200" height="210">
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li><a href="https://www.deakin.edu.au/">Home</a></li>
+            <li><a href="#unit-details">Unit Details</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <h1 class="header">SIT223–SIT753 - Professional Practice in IT</h1>
+
+        <h3 id="unit-details">Unit details</h3>
+        <table style="width:100%">
+            <tr>
+                <td>Year:</td>
+                <td>2023 unit information</td>
+            </tr>
+            <tr>
+                <td>Enrolment modes:</td>
+                <td>Trimester 1: Burwood (Melbourne), Geelong, Cloud (online)</td>
+            </tr>
+            <tr>
+                <td>Credit point(s):</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Unit Chair:</td>
+                <td>Trimester 1: Azadeh Ghari Neiat</td>
+            </tr>
+            <tr>
+                <td>Scheduled Learning Activities:</td>
+                <td>1 x 3 hour active class per week, weekly drop in support.</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Theme toggle JS -->
+    <script>
+        (function () {
+            var btn = document.getElementById('theme-toggle');
+            if (!btn) return;
+
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                try { localStorage.setItem('theme', theme); } catch (e) { }
+                var isDark = theme === 'dark';
+                btn.setAttribute('aria-pressed', String(isDark));
+                btn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+            }
+
+            // initialise from the attribute set in the <head> snippet
+            setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+
+            btn.addEventListener('click', function () {
+                var next = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+                setTheme(next);
+            });
+        })();
+    </script>
+
+    <!-- Sidebar toggle JS -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+
+        hamburger.addEventListener('mouseenter', () => {
+            sidebar.classList.add('open');
+            mainContent.classList.add('shift');
+        });
+
+        sidebar.addEventListener('mouseleave', () => {
+            sidebar.classList.remove('open');
+            mainContent.classList.remove('shift');
+        });
+    </script>
+
+    <!-- Smooth scroll for sidebar links -->
+    <script>
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+
     <h1>SIT223-SIT753 - Professional Practice in IT</h1>
     <h3> Content</h3>
     <p>
